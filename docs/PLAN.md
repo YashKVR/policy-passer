@@ -135,10 +135,10 @@ Build:
 
 Success criteria:
 
-- [ ] A unit test of `run("CHK-1002", "thread-1")` with the stub finishes with status `decided`, outcome `rejected`, and both mistakes stored.
-- [ ] The test asserts the stub's tool calls hit the API and that no test opened `data/evals/`.
-- [ ] The model factory uses `MODEL_NAME` when it is set, and otherwise `openai/gpt-6-luna` with low reasoning effort. The test does not create a live client.
-- [ ] `npm run check` passes without `OPENROUTER_API_KEY`.
+- [x] A unit test of `run("CHK-1002", "thread-1")` with the stub finishes with status `decided`, outcome `rejected`, and both mistakes stored.
+- [x] The test asserts the stub's tool calls hit the API and that no test opened `data/evals/`.
+- [x] The model factory uses `MODEL_NAME` when it is set, and otherwise `openai/gpt-6-luna` with low reasoning effort. The test does not create a live client.
+- [x] `npm run check` passes without `OPENROUTER_API_KEY`.
 
 ## Phase 6: Run a check from the queue
 

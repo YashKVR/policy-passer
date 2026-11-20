@@ -1,11 +1,11 @@
 # Status
 
-The dashboard shows the queue, a check, and the instructions.
+Policy Passer can decide a check. The dashboard does not start that review yet.
 
-- `/` lists each check and its status. Waiting is Sea Green, in progress is Marigold, and decided is Coral.
-- `/checks/{check_id}` shows the policy copy, the claim papers, the outcome, the mistakes, the explanation, and the activity.
-- `/instructions` shows the instructions as text, with no editor.
-- The API still loads the queue from `data/`, moves a check from waiting to decided, and keeps `CHK-9001` out of the queue.
-- `npm run dev` serves the dashboard on port 5173 and the backend on port 8000.
+- `run(check_id, thread_id)` reads the check and the instructions through the API, records each step, and stores one decision.
+- The model is `openai/gpt-6-luna` with low reasoning effort, or `MODEL_NAME` when that is set.
+- Tests use a stub model. They do not call OpenRouter, and they do not open `data/evals/`.
+- The dashboard lists the queue, shows a check, and shows the instructions.
+- There is still no route that submits papers or pays a claim.
 
-Policy Passer does not yet decide a check. The screens use the records already stored.
+`npm run dev` serves the dashboard on port 5173 and the backend on port 8000.
