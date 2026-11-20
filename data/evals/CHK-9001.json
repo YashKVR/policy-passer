@@ -1,0 +1,12 @@
+{
+  "id": "CHK-9001",
+  "title": "Held out",
+  "status": "decided",
+  "policy_copy": "Held out of the queue.",
+  "claim_papers": "Held out of the queue.",
+  "outcome": "approved",
+  "explanation": "The papers are ready to submit.",
+  "policy_section": "Held out",
+  "mistakes": [],
+  "activity": []
+}

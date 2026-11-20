@@ -1,0 +1,20 @@
+{
+  "id": "CHK-1003",
+  "title": "Jordan Lee, baggage theft",
+  "status": "decided",
+  "policy_copy": "Baggage. A theft of baggage is covered when a police report is filed within 24 hours. A theft without that report is not covered.",
+  "claim_papers": "Traveler: Jordan Lee. Loss: baggage theft of $300.00. No police report is attached.",
+  "outcome": "rejected",
+  "explanation": "The baggage section requires a police report within 24 hours for a theft. The papers do not include that report for the $300.00 loss. The claim would be rejected.",
+  "policy_section": "Baggage",
+  "mistakes": [
+    {
+      "mistake": "No police report for a theft of $300.00",
+      "reason": "The policy requires a police report filed within 24 hours."
+    }
+  ],
+  "activity": [
+    "Read the baggage section of the policy.",
+    "Checked the papers for a police report filed within 24 hours."
+  ]
+}

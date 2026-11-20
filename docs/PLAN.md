@@ -63,13 +63,13 @@ Build:
 
 Success criteria:
 
-- [ ] `GET /api/checks` returns `CHK-1001` and `CHK-1002` as `waiting`, and `CHK-1003` as `decided`, and does not return `CHK-9001`.
-- [ ] `GET /api/checks/CHK-1001` returns Maya Chen's policy copy and papers, status `waiting`, and an empty mistake list.
-- [ ] `GET /api/checks/CHK-1003` returns outcome `rejected`, the baggage mistake, and the reason about the police report.
-- [ ] `GET /api/checks/CHK-9001` returns `404`.
-- [ ] `GET /api/instructions` returns the text from `data/instructions.md`.
-- [ ] A backend test fails if the seed reads `data/evals/`.
-- [ ] `npm run check` passes.
+- [x] `GET /api/checks` returns `CHK-1001` and `CHK-1002` as `waiting`, and `CHK-1003` as `decided`, and does not return `CHK-9001`.
+- [x] `GET /api/checks/CHK-1001` returns Maya Chen's policy copy and papers, status `waiting`, and an empty mistake list.
+- [x] `GET /api/checks/CHK-1003` returns outcome `rejected`, the baggage mistake, and the reason about the police report.
+- [x] `GET /api/checks/CHK-9001` returns `404`.
+- [x] `GET /api/instructions` returns the text from `data/instructions.md`.
+- [x] A backend test fails if the seed reads `data/evals/`.
+- [x] `npm run check` passes.
 
 ## Phase 3: Decisions and activity
 
