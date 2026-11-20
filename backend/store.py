@@ -2,7 +2,7 @@ import os
 import sqlite3
 from pathlib import Path
 
-from backend.records import CheckOut, CheckRecord, CheckSummary
+from backend.records import CheckOut, CheckRecord, CheckSummary, DecisionWrite, StepOut
 from backend.seed import load_checks
 
 SCHEMA = """
@@ -85,6 +85,60 @@ def check_by_id(connection: sqlite3.Connection, check_id: str) -> CheckOut | Non
             {"mistake": item["mistake"], "reason": item["reason"]} for item in mistakes
         ],
     )
+
+
+def list_steps(connection: sqlite3.Connection, check_id: str) -> list[StepOut]:
+    rows = connection.execute(
+        "SELECT message FROM steps WHERE check_id = ? ORDER BY position, id",
+        (check_id,),
+    ).fetchall()
+    return [StepOut(message=row["message"]) for row in rows]
+
+
+def mark_in_progress(connection: sqlite3.Connection, check_id: str) -> None:
+    connection.execute(
+        "UPDATE checks SET status = ? WHERE id = ?",
+        ("in_progress", check_id),
+    )
+
+
+def insert_step(connection: sqlite3.Connection, check_id: str, message: str) -> None:
+    row = connection.execute(
+        "SELECT COALESCE(MAX(position), 0) AS position FROM steps WHERE check_id = ?",
+        (check_id,),
+    ).fetchone()
+    position = int(row["position"]) + 1 if row is not None else 1
+    connection.execute(
+        "INSERT INTO steps (check_id, position, message) VALUES (?, ?, ?)",
+        (check_id, position, message),
+    )
+
+
+def save_decision(
+    connection: sqlite3.Connection,
+    check_id: str,
+    decision: DecisionWrite,
+) -> None:
+    connection.execute("DELETE FROM mistakes WHERE check_id = ?", (check_id,))
+    connection.execute(
+        """
+        UPDATE checks
+        SET status = ?, outcome = ?, explanation = ?, policy_section = ?
+        WHERE id = ?
+        """,
+        (
+            "decided",
+            decision["outcome"],
+            decision["explanation"],
+            decision["policy_section"],
+            check_id,
+        ),
+    )
+    for mistake in decision["mistakes"]:
+        connection.execute(
+            "INSERT INTO mistakes (check_id, mistake, reason) VALUES (?, ?, ?)",
+            (check_id, mistake["mistake"], mistake["reason"]),
+        )
 
 
 def _insert_check(connection: sqlite3.Connection, check: CheckRecord) -> None:

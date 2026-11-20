@@ -91,14 +91,14 @@ Build:
 
 Success criteria:
 
-- [ ] `POST /api/checks/CHK-1001/start` returns the check with status `in_progress`. A second start returns `409`.
-- [ ] `POST /api/checks/CHK-1001/steps` with a message stores it, and `GET /api/checks/CHK-1001/activity` returns that step after the seeded order.
-- [ ] A step posted to `CHK-1003` returns `409`.
-- [ ] A decision of `rejected` with no mistakes returns `422`, and the check stays `in_progress`.
-- [ ] A decision of `approved` whose explanation does not say the papers are ready to submit returns `422`.
-- [ ] A valid `approved` decision on `CHK-1001` returns status `decided`, outcome `approved`, and the ready-to-submit explanation.
-- [ ] `GET /api/checks` has no submit or pay operation. The OpenAPI document contains neither.
-- [ ] `npm run check` passes.
+- [x] `POST /api/checks/CHK-1001/start` returns the check with status `in_progress`. A second start returns `409`.
+- [x] `POST /api/checks/CHK-1001/steps` with a message stores it, and `GET /api/checks/CHK-1001/activity` returns that step after the seeded order.
+- [x] A step posted to `CHK-1003` returns `409`.
+- [x] A decision of `rejected` with no mistakes returns `422`, and the check stays `in_progress`.
+- [x] A decision of `approved` whose explanation does not say the papers are ready to submit returns `422`.
+- [x] A valid `approved` decision on `CHK-1001` returns status `decided`, outcome `approved`, and the ready-to-submit explanation.
+- [x] `GET /api/checks` has no submit or pay operation. The OpenAPI document contains neither.
+- [x] `npm run check` passes.
 
 ## Phase 4: Dashboard
 

@@ -25,6 +25,17 @@ class CheckSummary(TypedDict):
     status: str
 
 
+class StepOut(TypedDict):
+    message: str
+
+
+class DecisionWrite(TypedDict):
+    outcome: str
+    explanation: str
+    policy_section: str
+    mistakes: list[Mistake]
+
+
 class CheckOut(TypedDict):
     id: str
     title: str
