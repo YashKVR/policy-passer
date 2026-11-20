@@ -1,10 +1,11 @@
 # Status
 
-A hello-world skeleton with every check in place:
+The pilot shell is running.
 
-- `backend/`: one route, `GET /api/health`
-- `agent/`: the entry point `run(claim_id, thread_id)`, with one tool that calls the health route
-- `dashboard/`: one page that shows whether the backend is up
-- `e2e/`: one test of that page
+- `npm run dev` starts the backend on port 8000 and the dashboard on port 5173.
+- `GET /api/health` returns `{"status": "ok"}`.
+- The dashboard shows whether the backend is up.
+- `agent.run(check_id, thread_id)` calls the health route.
+- `npm run check` runs the Python, TypeScript, and Playwright checks.
 
-Nothing of UnderCover is built yet. Update this file as you build.
+The check queue is not built yet.

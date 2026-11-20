@@ -7,6 +7,9 @@ node_modules
 .pytest_cache
 .ruff_cache
 .mypy_cache
-.pytest_cache
-.ruff_cache
-.mypy_cache
+dist
+coverage
+.coverage
+playwright-report
+test-results
+*.db

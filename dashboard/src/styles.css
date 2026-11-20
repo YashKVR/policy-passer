@@ -1,0 +1,51 @@
+:root {
+  --font-sans: "Instrument Sans", sans-serif;
+  --font-serif: "Instrument Serif", serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --ink: #073b4c;
+  --page: #f0f4f5;
+  --panel: #ffffff;
+  --sea-text: #087a5a;
+  --marigold-text: #8a5a00;
+  --coral-text: #9a4030;
+  --cerulean: #118ab2;
+  --raspberry: #ef476f;
+}
+
+[data-theme="dark"] {
+  --ink: #cdd8db;
+  --page: #04232e;
+  --panel: #000000;
+  --sea-text: #7eefcf;
+  --marigold-text: #ffd27a;
+  --coral-text: #ffb59f;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+main {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.tagline {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+}
+
+.panel {
+  background: var(--panel);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 1.8rem;
+}
