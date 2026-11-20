@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
+from agent.run import run
 from backend.decisions import decision_error
 from backend.records import CheckOut, CheckSummary, DecisionWrite, Mistake, StepOut
 from backend.seed import load_instructions
@@ -75,6 +76,10 @@ class DecisionIn(BaseModel):
     mistakes: list[MistakeIn]
 
 
+class RunIn(BaseModel):
+    thread_id: str
+
+
 @app.post("/api/checks/{check_id}/start", operation_id="start_check")
 def start_check(check_id: str) -> CheckOut:
     """Move a waiting check to in progress."""
@@ -137,6 +142,16 @@ def record_decision(check_id: str, body: DecisionIn) -> CheckOut:
         check["policy_section"] = body.policy_section
         check["mistakes"] = mistakes
         return check
+
+
+@app.post("/api/checks/{check_id}/run", operation_id="run_check")
+def run_check(check_id: str, body: RunIn) -> CheckOut:
+    """Decide one waiting check."""
+    with connect() as connection:
+        check = _load(connection, check_id)
+        if check["status"] != "waiting":
+            raise HTTPException(status_code=409, detail="Check is not waiting")
+    return run(check_id, body.thread_id)
 
 
 def _load(connection: sqlite3.Connection, check_id: str) -> CheckOut:

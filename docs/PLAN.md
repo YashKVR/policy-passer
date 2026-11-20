@@ -152,12 +152,12 @@ Build:
 
 Success criteria:
 
-- [ ] `POST /api/checks/CHK-1002/run` with `{"thread_id": "thread-1"}` and the stub returns `decided` and `rejected`, with the two mistakes and at least one new activity step.
-- [ ] The same call for `CHK-1003` returns `409`.
-- [ ] Vitest shows Run on a waiting check and hides it on `CHK-1003`.
-- [ ] Playwright still passes without a model call, using `CHK-1003` for the decided check.
-- [ ] In the browser, `CHK-1003` shows its steps in order, and a waiting check shows Run.
-- [ ] `npm run check` passes.
+- [x] `POST /api/checks/CHK-1002/run` with `{"thread_id": "thread-1"}` and the stub returns `decided` and `rejected`, with the two mistakes and at least one new activity step.
+- [x] The same call for `CHK-1003` returns `409`.
+- [x] Vitest shows Run on a waiting check and hides it on `CHK-1003`.
+- [x] Playwright still passes without a model call, using `CHK-1003` for the decided check.
+- [x] In the browser, `CHK-1003` shows its steps in order, and a waiting check shows Run.
+- [x] `npm run check` passes.
 
 ## Out of scope
 

@@ -1,11 +1,11 @@
 # Status
 
-Policy Passer can decide a check. The dashboard does not start that review yet.
+The pilot is running.
 
-- `run(check_id, thread_id)` reads the check and the instructions through the API, records each step, and stores one decision.
-- The model is `openai/gpt-6-luna` with low reasoning effort, or `MODEL_NAME` when that is set.
-- Tests use a stub model. They do not call OpenRouter, and they do not open `data/evals/`.
-- The dashboard lists the queue, shows a check, and shows the instructions.
-- There is still no route that submits papers or pays a claim.
+- `/` lists each check. Waiting is Sea Green, in progress is Marigold, and decided is Coral.
+- `/checks/{check_id}` shows the policy copy, the papers, the outcome, the mistakes, and the steps. A waiting check has Run. A decided check does not.
+- Run calls `POST /api/checks/{check_id}/run`. The agent reads the policy and the papers through the API and stores the decision. Tests use a stub model.
+- A rejection needs mistakes and a reason. An approval must say the papers are ready to submit.
+- `CHK-9001` stays in `data/evals/` and is not loaded. Nothing submits the papers.
 
-`npm run dev` serves the dashboard on port 5173 and the backend on port 8000.
+`npm run dev` serves the dashboard on port 5173 and the backend on port 8000. `npm run check` runs the Python, TypeScript, and Playwright checks.

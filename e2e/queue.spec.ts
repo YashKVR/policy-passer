@@ -29,6 +29,12 @@ test("shows a decided check", async ({ page }) => {
     ),
   ).toBeVisible();
   await expect(page.getByText("$300.00").first()).toBeVisible();
+  await expect(page.getByRole("button", { name: "Run check" })).toHaveCount(0);
+});
+
+test("shows run on a waiting check", async ({ page }) => {
+  await page.goto("/checks/CHK-1001");
+  await expect(page.getByRole("button", { name: "Run check" })).toBeVisible();
 });
 
 test("shows the instructions without an editor", async ({ page }) => {

@@ -99,3 +99,12 @@ nav a {
 .instructions {
   white-space: pre-wrap;
 }
+
+button {
+  background: var(--cerulean);
+  color: #ffffff;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  font: inherit;
+}

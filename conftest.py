@@ -40,6 +40,9 @@ def _free_port() -> int:
         return int(sock.getsockname()[1])
 
 
+OK = 200
+
+
 def _wait_until_ready(base: str) -> None:
     for _ in range(50):
         try:
@@ -47,7 +50,7 @@ def _wait_until_ready(base: str) -> None:
         except httpx.HTTPError:
             time.sleep(0.05)
             continue
-        if response.status_code == 200:
+        if response.status_code == OK:
             return
         time.sleep(0.05)
     message = "The check API did not start"

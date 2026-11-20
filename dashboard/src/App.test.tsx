@@ -67,6 +67,7 @@ test("shows a decided check", async () => {
   });
   render(<App />);
   expect(await screen.findByText("rejected")).toBeTruthy();
+  expect(screen.queryByRole("button", { name: "Run check" })).toBeNull();
   expect(
     screen.getByText(/No police report for a theft of \$300\.00/),
   ).toBeTruthy();
@@ -103,8 +104,100 @@ test("shows a waiting check with no mistakes", async () => {
   });
   render(<App />);
   expect(await screen.findByText("not decided")).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Run check" })).toBeTruthy();
   expect(screen.getByText("No mistakes.")).toBeTruthy();
   expect(screen.getByText(/\$480\.00/)).toBeTruthy();
+});
+
+test("runs a waiting check and polls the activity", async () => {
+  vi.useFakeTimers({ toFake: ["setInterval", "clearInterval"] });
+  window.history.pushState({}, "", "/checks/CHK-1001");
+  let runs = 0;
+  vi.stubGlobal(
+    "fetch",
+    vi.fn((input: RequestInfo | URL) => {
+      const url = String(input);
+      if (url.endsWith("/activity")) {
+        runs += 1;
+        const steps = runs > 1 ? [{ message: "Reading the policy copy." }] : [];
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(steps),
+        });
+      }
+      if (url.endsWith("/run")) {
+        return Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve({
+              ...decidedCheck,
+              id: "CHK-1001",
+              status: "decided",
+              outcome: "approved",
+              explanation: "The papers are ready to submit.",
+              mistakes: [],
+            }),
+        });
+      }
+      return Promise.resolve({
+        ok: true,
+        json: () =>
+          Promise.resolve({
+            ...decidedCheck,
+            id: "CHK-1001",
+            status: "waiting",
+            outcome: "",
+            explanation: "",
+            policy_section: "",
+            mistakes: [],
+          }),
+      });
+    }),
+  );
+  render(<App />);
+  const button = await screen.findByRole("button", { name: "Run check" });
+  button.click();
+  await vi.advanceTimersByTimeAsync(1000);
+  expect(await screen.findByText("Reading the policy copy.")).toBeTruthy();
+  expect(await screen.findByText("approved")).toBeTruthy();
+  expect(screen.queryByRole("button", { name: "Run check" })).toBeNull();
+  vi.useRealTimers();
+});
+
+test("shows when a check cannot be run", async () => {
+  window.history.pushState({}, "", "/checks/CHK-1001");
+  vi.stubGlobal(
+    "fetch",
+    vi.fn((input: RequestInfo | URL) => {
+      const url = String(input);
+      if (url.endsWith("/run")) {
+        return Promise.resolve({
+          ok: false,
+          status: 409,
+          json: () => Promise.resolve({}),
+        });
+      }
+      if (url.endsWith("/activity")) {
+        return Promise.resolve({ ok: true, json: () => Promise.resolve([]) });
+      }
+      return Promise.resolve({
+        ok: true,
+        json: () =>
+          Promise.resolve({
+            ...decidedCheck,
+            id: "CHK-1001",
+            status: "waiting",
+            outcome: "",
+            explanation: "",
+            policy_section: "",
+            mistakes: [],
+          }),
+      });
+    }),
+  );
+  render(<App />);
+  (await screen.findByRole("button", { name: "Run check" })).click();
+  expect(await screen.findByText("The check could not be run.")).toBeTruthy();
 });
 
 test("shows a missing check", async () => {
