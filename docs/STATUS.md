@@ -1,13 +1,11 @@
 # Status
 
-A check can move from waiting to decided, and the API enforces the decision rules.
+The dashboard shows the queue, a check, and the instructions.
 
-- `POST /api/checks/{check_id}/start` moves a waiting check to in progress.
-- `POST /api/checks/{check_id}/steps` records a step only while the check is in progress.
-- `GET /api/checks/{check_id}/activity` returns those steps in order.
-- `POST /api/checks/{check_id}/decision` stores an approval or a rejection. A rejection needs mistakes, an explanation, and a policy section. An approval must say the papers are ready to submit.
-- There is no route that submits papers or pays a claim.
-- The queue is still loaded from `data/`. `CHK-9001` stays out of it.
-- The dashboard shows whether the backend is up.
+- `/` lists each check and its status. Waiting is Sea Green, in progress is Marigold, and decided is Coral.
+- `/checks/{check_id}` shows the policy copy, the claim papers, the outcome, the mistakes, the explanation, and the activity.
+- `/instructions` shows the instructions as text, with no editor.
+- The API still loads the queue from `data/`, moves a check from waiting to decided, and keeps `CHK-9001` out of the queue.
+- `npm run dev` serves the dashboard on port 5173 and the backend on port 8000.
 
-The screens for the queue, a check, and the instructions are not built yet.
+Policy Passer does not yet decide a check. The screens use the records already stored.

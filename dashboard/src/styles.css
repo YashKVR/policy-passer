@@ -45,7 +45,57 @@ main {
   padding: 1.5rem;
 }
 
-h1 {
+h1,
+h2 {
   margin-top: 0;
+}
+
+h1 {
   font-size: 1.8rem;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+nav a {
+  color: var(--cerulean);
+}
+
+.id {
+  font-family: var(--font-mono);
+}
+
+.check-list {
+  list-style: none;
+  padding: 0;
+}
+
+.check-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.75rem 0;
+}
+
+.status {
+  font-weight: 600;
+}
+
+.waiting {
+  color: var(--sea-text);
+}
+
+.in_progress {
+  color: var(--marigold-text);
+}
+
+.decided {
+  color: var(--coral-text);
+}
+
+.instructions {
+  white-space: pre-wrap;
 }

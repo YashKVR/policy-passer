@@ -114,12 +114,12 @@ Fonts are Instrument Sans for the interface, Instrument Serif for the tagline, a
 
 Success criteria:
 
-- [ ] Vitest renders the queue with `CHK-1001` waiting, `CHK-1002` waiting, and `CHK-1003` decided.
-- [ ] Vitest renders `CHK-1003` with outcome rejected, the missing police report, the 24-hour reason, and both activity steps.
-- [ ] Vitest renders the instructions page with no text field and no button that saves.
-- [ ] Playwright opens `/`, `/checks/CHK-1003`, and `/instructions` against `npm run dev` and sees the same facts.
-- [ ] In the browser, the queue, the decided check, and the instructions page match the brand: the three status colors, a white panel, and the tagline in Instrument Serif.
-- [ ] `npm run check` passes.
+- [x] Vitest renders the queue with `CHK-1001` waiting, `CHK-1002` waiting, and `CHK-1003` decided.
+- [x] Vitest renders `CHK-1003` with outcome rejected, the missing police report, the 24-hour reason, and both activity steps.
+- [x] Vitest renders the instructions page with no text field and no button that saves.
+- [x] Playwright opens `/`, `/checks/CHK-1003`, and `/instructions` against `npm run dev` and sees the same facts.
+- [x] In the browser, the queue, the decided check, and the instructions page match the brand: the three status colors, a white panel, and the tagline in Instrument Serif.
+- [x] `npm run check` passes.
 
 ## Phase 5: Agent
 
